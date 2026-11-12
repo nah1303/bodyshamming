@@ -1,0 +1,2042 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trạm Trú Ân</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f7f3eb;
+        color: #2c2c2c;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* THANH ĐIỀU HƯỚNG */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+      }
+
+      .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #4a4a4a;
+        text-decoration: none;
+      }
+
+      .logo-icon {
+        font-size: 20px;
+      }
+
+      nav {
+        display: flex;
+        gap: 12px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 8px 16px;
+        background-color: #f3efe6;
+        border: 1px solid #e8e1d5;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      nav a.active {
+        background-color: #ded3c1;
+        border: 1px solid #c2b59f;
+        color: #2c3e35;
+        font-weight: 600;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+        transform: translateY(-2px);
+      }
+
+      nav a:hover {
+        background-color: #e8dfd0;
+        color: #3b4d42;
+      }
+
+      .user-menu {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .user-avatar-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #7d9688;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+        overflow: hidden;
+        border: 2px solid #d5cebc;
+      }
+
+      .user-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .avatar {
+        width: 38px;
+        height: 38px;
+        background-color: #8da497;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      .btn-logout {
+        background-color: transparent;
+        border: 1px solid #d5cebc;
+        padding: 8px 22px;
+        border-radius: 20px;
+        font-size: 15px;
+        cursor: pointer;
+        color: #4a4a4a;
+        transition: all 0.3s;
+      }
+
+      .btn-logout:hover {
+        background-color: #ebe4d8;
+      }
+
+      /* KHU VỰC CHUYỂN ĐỔI GIAO DIỆN (VIEWS) */
+      .view-section {
+        display: none;
+        flex: 1;
+        flex-direction: column;
+      }
+
+      .view-section.active-view {
+        display: flex;
+      }
+
+      /* --- 1. GIAO DIỆN TRANG CHỦ --- */
+      .main-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        padding: 40px 20px;
+        flex: 1;
+        align-items: center;
+      }
+
+      .card {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 24px;
+        width: 500px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+        position: relative;
+      }
+
+      .card-header-tag {
+        font-size: 13px;
+        font-weight: 600;
+        color: #6b6b6b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .card h2 {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .illustration-box {
+        width: 100%;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+      }
+
+      .card p {
+        font-size: 15px;
+        color: #555555;
+        line-height: 1.5;
+        margin-bottom: 30px;
+        min-height: 45px;
+      }
+
+      .btn-action {
+        background-color: #7d9688;
+        color: white;
+        border: none;
+        padding: 12px 35px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(125, 150, 136, 0.3);
+        transition: background-color 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-action:hover {
+        background-color: #6b8274;
+      }
+
+      /* --- 2. GIAO DIỆN "VỀ CHÚNG TÔI" --- */
+      .about-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px 60px;
+        gap: 50px;
+        flex: 1;
+      }
+
+      .about-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: 20px;
+      }
+
+      .about-left h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #2c2c2c;
+        line-height: 1.3;
+        margin-bottom: 25px;
+      }
+
+      .about-left h3 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .about-left p {
+        font-size: 16px;
+        color: #4a4a4a;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .lighthouse-img {
+        width: 100%;
+        max-height: 180px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-top: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .about-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .about-right h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 5px;
+      }
+
+      .mission-row {
+        display: flex;
+        gap: 20px;
+      }
+
+      .mission-box {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 20px;
+        padding: 25px 20px;
+        flex: 1;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      }
+
+      .mission-box h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .mission-box p {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+      }
+
+      .quote-text {
+        font-style: italic;
+        font-weight: 600;
+        color: #4a5d53;
+        text-align: center;
+        font-size: 15px;
+        margin: 5px 0;
+      }
+
+      .core-values-grid {
+        display: flex;
+        gap: 15px;
+      }
+
+      .value-card {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 16px;
+        padding: 20px 15px;
+        flex: 1;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      }
+
+      .value-card .icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .value-card h5 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 8px;
+      }
+
+      .value-card p {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.4;
+      }
+
+      /* --- 3. GIAO DIỆN DANH SÁCH "BÀI VIẾT" --- */
+      .posts-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 40px 40px 40px;
+        flex: 1;
+      }
+
+      .posts-title-area {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .posts-title-area h2 {
+        font-size: 26px;
+        font-weight: 800;
+        color: #2c2c2c;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .posts-title-area p {
+        font-size: 15px;
+        color: #555;
+        font-weight: 500;
+      }
+
+      .posts-grid {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        width: 100%;
+        max-width: 1000px;
+      }
+
+      .post-card {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 20px;
+        width: calc(50% - 15px);
+        padding: 25px 20px;
+        text-align: center;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .post-card h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 15px;
+        line-height: 1.4;
+        min-height: 45px;
+      }
+
+      .post-illustration {
+        width: 100%;
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        background-color: #f4efe6;
+        border-radius: 12px;
+        border: 1px dashed #dcd3c2;
+        color: #7d9688;
+        font-size: 32px;
+      }
+
+      .post-card p {
+        font-size: 13px;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        text-align: left;
+        min-height: 65px;
+      }
+
+      .btn-post-action {
+        background-color: #7d9688;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 3px 8px rgba(125, 150, 136, 0.3);
+        transition: background-color 0.3s;
+        width: 100%;
+      }
+
+      .btn-post-action:hover {
+        background-color: #6b8274;
+      }
+
+      /* --- CHI TIẾT BÀI VIẾT --- */
+      .article-detail-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 50px;
+        flex: 1;
+        animation: slideUp 0.4s ease-out forwards;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .article-main-title {
+        font-size: 26px;
+        font-weight: 800;
+        color: #2c2c2c;
+        margin-bottom: 30px;
+        text-align: center;
+        letter-spacing: 0.5px;
+      }
+
+      .content-frame-box {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 24px;
+        padding: 35px 40px;
+        width: 100%;
+        max-width: 1200px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        margin-bottom: 25px;
+        position: relative;
+      }
+
+      .btn-back-to-posts {
+        background: none;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        color: #555;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 20px;
+      }
+      .btn-back-to-posts:hover {
+        color: #31513e;
+      }
+
+      .article-two-columns {
+        display: flex;
+        gap: 40px;
+        width: 100%;
+      }
+
+      .article-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .article-section-box h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 12px;
+        line-height: 1.4;
+      }
+
+      .article-section-box ul {
+        list-style-type: disc;
+        padding-left: 20px;
+      }
+
+      .article-section-box li {
+        font-size: 15px;
+        color: #444;
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+
+      .article-quote-box {
+        background-color: #f5f0e6;
+        border: 1.5px solid #e2dbcd;
+        border-radius: 16px;
+        padding: 20px 35px;
+        width: 100%;
+        max-width: 1200px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        margin-bottom: 20px;
+      }
+
+      .article-quote-box p {
+        font-size: 15px;
+        color: #3b4d42;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 1.6;
+      }
+
+      .article-4-columns {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .part-col {
+        flex: 1;
+        background: #fff;
+        padding: 20px 15px;
+        border-radius: 16px;
+        border: 1px solid #e8e1d5;
+        text-align: left;
+      }
+
+      .part-col h4 {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      .part-col ul {
+        list-style-type: disc;
+        padding-left: 18px;
+      }
+
+      .part-col li {
+        font-size: 13px;
+        color: #444;
+        margin-bottom: 6px;
+        line-height: 1.4;
+      }
+
+      /* --- 4. GIAO DIỆN BẢNG TIN, STORY & XEM STORY --- */
+      .forum-feed-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+        flex: 1;
+        max-width: 750px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .feed-header-bar {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .feed-header-bar h2 {
+        font-size: 22px;
+        font-weight: 800;
+        color: #2c3e35;
+      }
+
+      /* Thanh Story */
+      .stories-container {
+        display: flex;
+        gap: 12px;
+        width: 100%;
+        margin-bottom: 20px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .story-card {
+        min-width: 105px;
+        height: 155px;
+        background: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 6px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+        transition: transform 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .story-card:hover {
+        transform: scale(1.03);
+      }
+
+      .story-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #7d9688;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+        border: 2px solid #c2b59f;
+        z-index: 2;
+      }
+
+      .story-name {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .story-bg-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.85;
+        z-index: 1;
+      }
+
+      /* Modal xem story */
+      .story-viewer-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+      .story-viewer-content {
+        background: #222;
+        width: 380px;
+        height: 600px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .story-viewer-header {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.4);
+        color: white;
+        z-index: 3;
+      }
+      .story-viewer-body {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .story-viewer-body img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .story-close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        z-index: 4;
+        background: none;
+        border: none;
+      }
+
+      /* Hộp đăng bài */
+      .create-post-box {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 20px;
+        padding: 20px;
+        width: 100%;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        margin-bottom: 20px;
+      }
+
+      .create-post-box textarea {
+        width: 100%;
+        border: 1px solid #e5dfd3;
+        border-radius: 12px;
+        padding: 15px;
+        font-size: 15px;
+        outline: none;
+        resize: none;
+        height: 90px;
+        background: #fff;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .create-post-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .post-option-group {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 13.5px;
+        color: #555;
+      }
+
+      .upload-img-label {
+        cursor: pointer;
+        background: #f3efe6;
+        border: 1px solid #dcd3c2;
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        color: #444;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .upload-img-label:hover {
+        background: #e8dfd0;
+      }
+
+      .btn-submit-post {
+        background-color: #7d9688;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 15px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .btn-submit-post:hover {
+        background-color: #6b8274;
+      }
+
+      /* Danh sách bài viết */
+      .posts-feed-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .feed-post-card {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 20px;
+        padding: 20px;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        text-align: left;
+      }
+
+      .post-author-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .author-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #7d9688;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      .author-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: #333;
+      }
+
+      .post-time {
+        font-size: 12px;
+        color: #888;
+      }
+
+      .post-content-text {
+        font-size: 15px;
+        color: #444;
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+
+      .post-media-img {
+        width: 100%;
+        max-height: 350px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        border: 1px solid #e5dfd3;
+      }
+
+      .post-actions-bar {
+        display: flex;
+        gap: 12px;
+        border-top: 1px solid #eee5d8;
+        padding-top: 10px;
+        font-size: 13.5px;
+        color: #666;
+        flex-wrap: wrap;
+      }
+
+      .post-action-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+      .post-action-btn:hover {
+        background: #f3efe6;
+        color: #7d9688;
+      }
+
+      .comments-section {
+        margin-top: 12px;
+        border-top: 1px dashed #e2dbcd;
+        padding-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .comment-item {
+        background: #f7f3eb;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-size: 13.5px;
+        color: #444;
+      }
+
+      .comment-input-box {
+        display: flex;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .comment-input-box input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #dcd6cb;
+        border-radius: 10px;
+        font-size: 13.5px;
+        outline: none;
+        background: #fff;
+      }
+
+      .btn-send-comment {
+        background: #7d9688;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 10px;
+        font-size: 13.5px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn-send-comment:hover {
+        background: #6b8274;
+      }
+
+      /* --- GIAO DIỆN LIÊN HỆ --- */
+      .contact-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 60px;
+        flex: 1;
+        justify-content: center;
+      }
+
+      .contact-top-box {
+        background-color: #fcfbf8;
+        border: 2px solid #e2dbcd;
+        border-radius: 20px;
+        padding: 30px 50px;
+        text-align: center;
+        max-width: 950px;
+        margin-bottom: 50px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+      }
+
+      .contact-top-box p {
+        font-size: 17px;
+        color: #333;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      .contact-methods-grid {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1100px;
+        position: relative;
+      }
+
+      .contact-item {
+        flex: 1;
+        text-align: center;
+        padding: 0 20px;
+        position: relative;
+      }
+
+      .contact-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 20%;
+        height: 60%;
+        width: 1px;
+        background-color: #dcd3c2;
+      }
+
+      .contact-icon-circle {
+        font-size: 32px;
+        margin-bottom: 15px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+      }
+
+      .contact-item h4 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+
+      .contact-item p,
+      .contact-item a {
+        font-size: 14px;
+        color: #555;
+        text-decoration: none;
+        word-break: break-all;
+        line-height: 1.4;
+      }
+
+      .contact-item a:hover {
+        text-decoration: underline;
+        color: #31513e;
+      }
+
+      /* FOOTER CHUNG */
+      footer {
+        text-align: center;
+        padding: 15px 20px;
+      }
+
+      footer h1 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 24px;
+        font-weight: 400;
+        font-style: italic;
+        color: #4a5d53;
+        letter-spacing: 0.5px;
+      }
+
+      /* MODAL ĐĂNG NHẬP */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.25);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .login-card {
+        background-color: #fcfbf8;
+        border: 2px solid #e5dfd3;
+        border-radius: 24px;
+        width: 440px;
+        padding: 35px 30px;
+        text-align: center;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #888;
+        background: none;
+        border: none;
+      }
+      .close-btn:hover {
+        color: #000;
+      }
+
+      .login-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 25px;
+      }
+
+      .input-group {
+        position: relative;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 14px 45px 14px 18px;
+        border: 1px solid #dcd6cb;
+        border-radius: 12px;
+        background-color: #ffffff;
+        font-size: 15px;
+        outline: none;
+        color: #333;
+      }
+
+      .input-group .input-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+        font-size: 16px;
+      }
+
+      .btn-main-login,
+      .btn-facebook,
+      .btn-anonymous {
+        width: 100%;
+        padding: 13px;
+        background-color: #31513e;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 12px;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .btn-main-login:hover,
+      .btn-facebook:hover,
+      .btn-anonymous:hover {
+        background-color: #254030;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #b5ada0;
+        font-size: 13px;
+        margin: 15px 0;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ded6cb;
+      }
+      .divider::before {
+        margin-right: 10px;
+      }
+      .divider::after {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- THANH MENU TRÊN -->
+    <header>
+      <a href="index1.html" class="logo-area">
+        <span>Trạm Trú Ân</span>
+        <span class="logo-icon">🕊️</span>
+      </a>
+      <nav id="navMenu">
+        <a
+          href="#"
+          data-target="homeView"
+          class="active"
+          onclick="switchToHomeView(event)"
+          >Trang chủ</a
+        >
+        <a href="#" data-target="aboutView" onclick="switchTab('aboutView')"
+          >Về chúng tôi</a
+        >
+        <a href="#" data-target="postsView" onclick="switchTab('postsView')"
+          >Bài viết</a
+        >
+        <a href="#" data-target="forumFeedView" onclick="openFeedView('heal')"
+          >Diễn đàn</a
+        >
+        <a href="#" data-target="contactView" onclick="switchTab('contactView')"
+          >Liên hệ</a
+        >
+      </nav>
+      <div class="user-menu" id="userMenuArea">
+        <div class="avatar">👤</div>
+        <button class="btn-logout" id="openLoginBtn">Đăng nhập</button>
+      </div>
+    </header>
+
+    <!-- ================= 1. GIAO DIỆN TRANG CHỦ ================= -->
+    <div id="homeView" class="view-section active-view">
+      <main class="main-container">
+        <div class="card" style="width: 600px; max-width: 100%">
+          <div class="card-header-tag">Không gian an toàn</div>
+          <h2>🌸 CHỮA LÀNH TỔN THƯƠNG</h2>
+          <div class="illustration-box">
+            <svg
+              width="120"
+              height="120"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#6b8274"
+              stroke-width="1.5"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+          <p>
+            Nơi trút bỏ gánh nặng, xoa dịu tổn thương và xây dựng lại sự tự tin.
+            Trạm Trú Ân đồng hành cùng bạn trên hành trình yêu thương bản thân.
+          </p>
+          <a href="victim.html" class="btn-action">Bắt đầu chữa lành</a>
+        </div>
+      </main>
+      <footer>
+        <h1>Body shamming sẽ không còn nữa nếu tất cả chúng ta hành động</h1>
+      </footer>
+    </div>
+
+    <!-- ================= 2. GIAO DIỆN "VỀ CHÚNG TÔI" ================= -->
+    <div id="aboutView" class="view-section">
+      <div class="about-container">
+        <div class="about-left">
+          <h1>
+            Chào mừng bạn đến với Trạm Trú Ân – Không gian chữa lành, nơi body
+            shaming không còn chỗ đứng.
+          </h1>
+          <h3>Câu chuyện của chúng tôi</h3>
+          <p>
+            Trong một xã hội hiện đại, những lời phán xét vô tình hay hữu ý về
+            ngoại hình (body shaming) đang trở thành một vết thương sâu sắc
+            trong tâm lý của nhiều người.
+          </p>
+          <p>
+            Nhận thấy sự thiếu vắng của một không gian an toàn và bao dung, Trạm
+            Trú Ân đã được ra đời để lắng nghe, thấu hiểu và cùng bạn đi qua
+            những giông bão tinh thần.
+          </p>
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+            alt="Ngọn hải đăng"
+            class="lighthouse-img"
+          />
+        </div>
+        <div class="about-right">
+          <h2>Sứ mệnh của Trạm Trú Ân</h2>
+          <div class="mission-row">
+            <div class="mission-box" style="flex: 1">
+              <h4>🌸 Chữa lành tổn thương</h4>
+              <p>
+                Trạm Trú Ân là nơi bạn có thể trút bỏ những gánh nặng tâm lý,
+                xoa dịu các vết thương lòng do lời miệt thị gây ra, tái định vị
+                giá trị cá nhân và xây dựng lại sự tự tin.
+              </p>
+            </div>
+          </div>
+          <div class="quote-text">
+            We believe: "Body shaming will no longer exist if we all act."
+          </div>
+          <h2>Giá trị cốt lõi</h2>
+          <div class="core-values-grid">
+            <div class="value-card">
+              <div class="icon">🔒</div>
+              <h5>An toàn & Bảo mật</h5>
+              <p>
+                Mọi chia sẻ đều được tôn trọng tuyệt đối và bảo mật thông tin.
+              </p>
+            </div>
+            <div class="value-card">
+              <div class="icon">🤝</div>
+              <h5>Không phán xét</h5>
+              <p>Đón nhận bạn bằng sự thấu cảm và bao dung chân thành.</p>
+            </div>
+            <div class="value-card">
+              <div class="icon">👥</div>
+              <h5>Đồng hành toàn diện</h5>
+              <p>
+                Kết nối cộng đồng và cung cấp các công cụ hỗ trợ thiết thực.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <h1>Body shamming sẽ không còn nữa nếu tất cả chúng ta hành động</h1>
+      </footer>
+    </div>
+
+    <!-- ================= 3. GIAO DIỆN DANH SÁCH "BÀI VIẾT" ================= -->
+    <div id="postsView" class="view-section">
+      <div class="posts-container">
+        <div class="posts-title-area">
+          <h2>BÀI VIẾT (KNOWLEDGE HUB)</h2>
+          <p>
+            Khám phá các chuyên đề kiến thức chuyên sâu và cẩm nang chữa lành
+          </p>
+        </div>
+
+        <div class="posts-grid">
+          <div class="post-card">
+            <div>
+              <h3>1. Kiến thức chuyên sâu về Body Shaming & Tâm lý học</h3>
+              <div class="post-illustration">📚</div>
+              <p>
+                Nhận diện các hình thức Body Shaming; Cyberbullying; Gốc rễ tâm
+                lý và cách bảo vệ bản thân.
+              </p>
+            </div>
+            <button
+              class="btn-post-action"
+              onclick="openArticle('articleDetailView')"
+            >
+              Bắt đầu đọc
+            </button>
+          </div>
+
+          <div class="post-card">
+            <div>
+              <h3>2. Cẩm nang chữa lành và xây dựng nội lực</h3>
+              <div class="post-illustration">🌸</div>
+              <p>
+                Kỹ năng đối phó với miệt thị ngoại hình; Xây dựng sự tự tin;
+                Chấp nhận bản thân và Self-love practices.
+              </p>
+            </div>
+            <button
+              class="btn-post-action"
+              onclick="openArticle('articlePart2View')"
+            >
+              Đọc tiếp
+            </button>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <h1>Body shamming sẽ không còn nữa nếu tất cả chúng ta hành động</h1>
+      </footer>
+    </div>
+
+    <!-- ================= CHI TIẾT BÀI VIẾT ================= -->
+    <div id="articleDetailView" class="view-section">
+      <div class="article-detail-container">
+        <div class="content-frame-box">
+          <button class="btn-back-to-posts" onclick="goBackToPosts()">
+            ◀ Quay lại bài viết
+          </button>
+          <h2 class="article-main-title">
+            1. Kiến Thức Chuyên Sâu Về Body Shaming & Tâm Lý Học
+          </h2>
+          <div class="article-two-columns">
+            <div class="article-col">
+              <div class="article-section-box">
+                <h3>1. Nhận Diện Các Hình Thức</h3>
+                <ul>
+                  <li>Miệt thị trực tiếp (Direct Shaming)</li>
+                  <li>Miệt thị gián tiếp (Indirect Shaming)</li>
+                  <li>Tự miệt thị (Self-Shaming)</li>
+                  <li>Ngụy trang bằng sự ‘quan tâm’</li>
+                </ul>
+              </div>
+            </div>
+            <div class="article-col">
+              <div class="article-section-box">
+                <h3>2. Gốc Rễ Tâm Lý Nạn Nhân</h3>
+                <ul>
+                  <li>Hội chứng mặc cảm ngoại hình (BDD)</li>
+                  <li>Rối loạn ăn uống và ảnh hưởng sức khỏe</li>
+                  <li>Nội tâm hóa lời chê bai</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="article-quote-box">
+          <p>
+            “Body shaming không bao giờ là lỗi của bạn. Hiểu rõ về bản chất tâm
+            lý của nó là bước đi đầu tiên để chúng ta xây dựng một tấm khiên bảo
+            vệ chính mình.”
+          </p>
+        </div>
+      </div>
+      <footer>
+        <h1>Body shamming sẽ không còn nữa nếu tất cả chúng ta hành động</h1>
+      </footer>
+    </div>
+
+    <div id="articlePart2View" class="view-section">
+      <div class="article-detail-container">
+        <div class="content-frame-box">
+          <button class="btn-back-to-posts" onclick="goBackToPosts()">
+            ◀ Quay lại bài viết
+          </button>
+          <h2 class="article-main-title">
+            2. Cẩm Nang Chữa Lành & Xây Dựng Nội Lực
+          </h2>
+          <div class="article-4-columns">
+            <div class="part-col">
+              <h4>1. Kỹ Năng Đối Phó</h4>
+              <ul>
+                <li>Tạo khoảng cách cảm xúc</li>
+                <li>Phản ứng trung lập</li>
+                <li>Thiết lập ranh giới</li>
+                <li>Sàng lọc không gian số</li>
+              </ul>
+            </div>
+            <div class="part-col">
+              <h4>2. Xây Dựng Sự Tự Tin</h4>
+              <ul>
+                <li>Tập trung công năng cơ thể</li>
+                <li>Phát triển giá trị phi ngoại hình</li>
+                <li>Thay đổi độc thoại nội tâm</li>
+              </ul>
+            </div>
+            <div class="part-col">
+              <h4>3. Chấp Nhận Bản Thân</h4>
+              <ul>
+                <li>Cơ thể thực tế</li>
+                <li>Ngừng so sánh</li>
+                <li>Thấu cảm chính mình</li>
+              </ul>
+            </div>
+            <div class="part-col">
+              <h4>4. Thực Hành Yêu Thương</h4>
+              <ul>
+                <li>Nhật ký biết ơn</li>
+                <li>Soi gương tích cực</li>
+                <li>Digital detox</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="article-quote-box">
+          <p>
+            “Bạn sinh ra không phải để đáp ứng tiêu chuẩn thẩm mỹ của bất kỳ ai.
+            Hành trình chữa lành lớn nhất chính là khi bạn nhận ra bản thân mình
+            đã là một phiên bản đáng trân trọng.”
+          </p>
+        </div>
+      </div>
+      <footer>
+        <h1>Body shamming sẽ không còn nữa nếu tất cả chúng ta hành động</h1>
+      </footer>
+    </div>
+
+    <!-- ================= 4. GIAO DIỆN BẢNG TIN, STORY & XEM STORY ================= -->
+    <div id="forumFeedView" class="view-section">
+      <div class="forum-feed-container">
+        <div class="feed-header-bar">
+          <h2>🌸 Khu vực: Chữa Lành Tổn Thương</h2>
+        </div>
+
+        <!-- Thanh Story -->
+        <div class="stories-container" id="storiesBar">
+          <div
+            class="story-card"
+            onclick="requestPermissionAndAddStory()"
+            style="background: #f4efe6; border-style: dashed"
+          >
+            <div class="story-avatar">+</div>
+            <div class="story-name">Thêm Story</div>
+          </div>
+        </div>
+
+        <!-- Khung đăng bài -->
+        <div class="create-post-box">
+          <textarea
+            id="postContentInput"
+            placeholder="Bạn muốn chia sẻ câu chuyện, trút bỏ tâm sự hoặc khoảnh khắc tích cực hôm nay..."
+          ></textarea>
+          <div class="create-post-actions">
+            <div class="post-option-group">
+              <label
+                class="upload-img-label"
+                onclick="requestPermissionForPost(event)"
+              >
+                📷 Thêm ảnh
+              </label>
+              <input
+                type="file"
+                id="postImageFile"
+                accept="image/*"
+                style="display: none"
+                onchange="handlePostImage(this)"
+              />
+              <label
+                ><input type="checkbox" id="anonymousCheck" checked /> Ẩn danh
+                an toàn</label
+              >
+            </div>
+            <button class="btn-submit-post" onclick="submitNewPost()">
+              Đăng bài
+            </button>
+          </div>
+        </div>
+
+        <!-- Danh sách bài viết hiển thị -->
+        <div class="posts-feed-list" id="postsFeedList"></div>
+      </div>
+      <footer>
+        <h1>Body shamming sẽ không còn nữa nếu tất cả chúng ta hành động</h1>
+      </footer>
+    </div>
+
+    <!-- MODAL XEM STORY -->
+    <div
+      class="story-viewer-modal"
+      id="storyViewerModal"
+      onclick="closeStoryViewer()"
+    >
+      <div class="story-viewer-content" onclick="event.stopPropagation()">
+        <button class="story-close-btn" onclick="closeStoryViewer()">
+          &times;
+        </button>
+        <div class="story-viewer-header">
+          <div class="story-avatar" id="viewerAvatar">✨</div>
+          <div>
+            <div style="font-weight: bold; font-size: 14px" id="viewerName">
+              Tên người dùng
+            </div>
+            <div style="font-size: 11px; color: #aaa">
+              Khoảnh khắc chữa lành
+            </div>
+          </div>
+        </div>
+        <div class="story-viewer-body">
+          <img id="viewerImage" src="" alt="Story image" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 5. GIAO DIỆN LIÊN HỆ ================= -->
+    <div id="contactView" class="view-section">
+      <div class="contact-container">
+        <div class="contact-top-box">
+          <p>
+            Trạm Trú Ân luôn lắng nghe bạn. Đừng ngần ngại chia sẻ câu chuyện
+            hoặc tìm kiếm sự trợ giúp từ chúng tôi. Mọi thông tin đều được bảo
+            mật tuyệt đối.
+          </p>
+        </div>
+        <div class="contact-methods-grid">
+          <div class="contact-item">
+            <div class="contact-icon-circle">📞</div>
+            <h4>Hotline hỗ trợ khẩn cấp:</h4>
+            <p>037 800 7376</p>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon-circle">✉️</div>
+            <h4>Email hỗ trợ:</h4>
+            <p>nah91865@gmail.com</p>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon-circle">💬</div>
+            <h4>Zalo:</h4>
+            <p>037 800 7376</p>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon-circle">🌐</div>
+            <h4>Facebook:</h4>
+            <a href="https://www.facebook.com/share/19PNBV45rn/" target="_blank"
+              >https://www.facebook.com/share/19PNBV45rn/</a
+            >
+          </div>
+        </div>
+      </div>
+      <footer>
+        <h1>Body shamming sẽ không còn nữa nếu tất cả chúng ta hành động</h1>
+      </footer>
+    </div>
+
+    <!-- MODAL ĐĂNG NHẬP -->
+    <div class="modal-overlay" id="loginModal">
+      <div class="login-card">
+        <button class="close-btn" id="closeLoginBtn">&times;</button>
+        <div class="login-header"><span>🕊️</span> Trạm Trú Ân</div>
+        <p
+          id="loginNoticeText"
+          style="font-size: 14px; color: #555; margin-bottom: 20px"
+        >
+          Vui lòng đăng nhập hoặc đăng ký tài khoản để tham gia chia sẻ và đăng
+          bài trên diễn đàn chữa lành.
+        </p>
+        <div class="input-group">
+          <input
+            type="text"
+            id="emailInput"
+            placeholder="Số điện thoại hoặc email"
+          />
+          <span class="input-icon">📱</span>
+        </div>
+        <div class="input-group">
+          <input type="password" id="passInput" placeholder="Mật khẩu" />
+          <span class="input-icon">🔒</span>
+        </div>
+        <button class="btn-main-login" id="submitLoginBtn">Đăng nhập</button>
+        <div class="divider">Hoặc đăng nhập bằng</div>
+        <button class="btn-facebook" id="facebookLoginBtn">
+          <span>f</span> Đăng nhập bằng Facebook
+        </button>
+        <button class="btn-anonymous" id="anonymousLoginBtn">
+          <span>🕊️</span> Đăng nhập Ẩn danh
+        </button>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT XỬ LÝ -->
+    <script>
+      let isUserLoggedIn = false;
+      let loggedInUserName = "";
+      let selectedPostImageUrl = "";
+
+      // Chỉ lưu trữ dữ liệu bài viết chữa lành (heal)
+      const forumPostsList = [
+        {
+          id: 1,
+          author: "Thành viên ẩn danh",
+          time: "Hôm nay, 09:30",
+          text: "Hôm nay mình đã dũng cảm bước qua được nỗi sợ ánh nhìn của người khác về cân nặng. Cảm ơn Trạm Trú Ân vì đã luôn là nơi an toàn.",
+          img: "",
+          hugs: 14,
+          hearts: 8,
+          comments: [
+            {
+              author: "Mai Linh",
+              text: "Tuyệt vời lắm bạn ơi, hãy luôn tự tin nhé! 💖",
+            },
+          ],
+        },
+      ];
+
+      const storiesList = [
+        {
+          name: "Mai Linh",
+          avatar: "M",
+          img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
+        },
+        {
+          name: "Quốc Hưng",
+          avatar: "Q",
+          img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80",
+        },
+      ];
+
+      const toxicKeywordsDatabase = [
+        "mập",
+        "béo",
+        "lợn",
+        "heo",
+        "phì",
+        "ú",
+        "tròn",
+        "xồ xề",
+        "gầy",
+        "trơ xương",
+        "mắm",
+        "lùn",
+        "thấp",
+        "xấu",
+        "kinh tởm",
+        "ngu",
+        "đần",
+        "chửi",
+        "hãm",
+        "chết",
+      ];
+
+      function checkToxicContent(text) {
+        const lowerText = text.toLowerCase();
+        for (let word of toxicKeywordsDatabase) {
+          if (lowerText.includes(word)) return true;
+        }
+        return false;
+      }
+
+      const navLinks = document.querySelectorAll("#navMenu a");
+      const viewSections = document.querySelectorAll(".view-section");
+
+      function switchToHomeView(e) {
+        e.preventDefault();
+        navLinks.forEach((item) => item.classList.remove("active"));
+        document
+          .querySelector('#navMenu a[data-target="homeView"]')
+          .classList.add("active");
+        viewSections.forEach((section) =>
+          section.classList.remove("active-view"),
+        );
+        document.getElementById("homeView").classList.add("active-view");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function switchTab(targetViewId) {
+        navLinks.forEach((item) => item.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+        viewSections.forEach((section) =>
+          section.classList.remove("active-view"),
+        );
+        document.getElementById(targetViewId).classList.add("active-view");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function goBackToPosts() {
+        viewSections.forEach((section) =>
+          section.classList.remove("active-view"),
+        );
+        document.getElementById("postsView").classList.add("active-view");
+        navLinks.forEach((item) => item.classList.remove("active"));
+        document
+          .querySelector('#navMenu a[data-target="postsView"]')
+          .classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function openArticle(viewId) {
+        viewSections.forEach((section) =>
+          section.classList.remove("active-view"),
+        );
+        document.getElementById(viewId).classList.add("active-view");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function openFeedView() {
+        if (!isUserLoggedIn) {
+          document.getElementById("loginNoticeText").innerText =
+            "Vui lòng đăng nhập hoặc đăng ký tài khoản để tham gia chia sẻ và đăng bài trên Diễn đàn.";
+          modal.style.display = "flex";
+        } else {
+          viewSections.forEach((section) =>
+            section.classList.remove("active-view"),
+          );
+          document.getElementById("forumFeedView").classList.add("active-view");
+          renderStories();
+          renderFeedPosts(forumPostsList);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+
+      function requestPermissionAndAddStory() {
+        let allow = confirm(
+          "Trạm Trú Ân muốn yêu cầu quyền truy cập bộ nhớ để chọn ảnh đăng Story?",
+        );
+        if (allow) {
+          let fileInput = document.createElement("input");
+          fileInput.type = "file";
+          fileInput.accept = "image/*";
+          fileInput.onchange = (e) => {
+            if (e.target.files && e.target.files[0]) {
+              const imageUrl = URL.createObjectURL(e.target.files[0]);
+              storiesList.unshift({
+                name: loggedInUserName || "Cá nhân",
+                avatar: loggedInUserName
+                  ? loggedInUserName.charAt(0).toUpperCase()
+                  : "🌸",
+                img: imageUrl,
+              });
+              renderStories();
+              alert("Đăng story thành công!");
+            }
+          };
+          fileInput.click();
+        }
+      }
+
+      function requestPermissionForPost(event) {
+        event.preventDefault();
+        let allow = confirm(
+          "Trạm Trú Ân muốn yêu cầu quyền truy cập bộ nhớ để đính kèm ảnh vào bài viết?",
+        );
+        if (allow) {
+          document.getElementById("postImageFile").click();
+        }
+      }
+
+      function handlePostImage(input) {
+        if (input.files && input.files[0]) {
+          selectedPostImageUrl = URL.createObjectURL(input.files[0]);
+          alert("Đã chọn ảnh thành công!");
+        }
+      }
+
+      function viewStory(index) {
+        const story = storiesList[index];
+        document.getElementById("viewerAvatar").innerText = story.avatar;
+        document.getElementById("viewerName").innerText = story.name;
+        document.getElementById("viewerImage").src = story.img;
+        document.getElementById("storyViewerModal").style.display = "flex";
+      }
+
+      function closeStoryViewer() {
+        document.getElementById("storyViewerModal").style.display = "none";
+      }
+
+      function renderStories() {
+        const bar = document.getElementById("storiesBar");
+        bar.innerHTML = `
+          <div class="story-card" onclick="requestPermissionAndAddStory()" style="background: #f4efe6; border-style: dashed;">
+              <div class="story-avatar">+</div>
+              <div class="story-name">Thêm Story</div>
+          </div>
+        `;
+        storiesList.forEach((s, idx) => {
+          const card = document.createElement("div");
+          card.className = "story-card";
+          card.onclick = () => viewStory(idx);
+          let imgBg = s.img ? `<img src="${s.img}" class="story-bg-img">` : "";
+          card.innerHTML = `
+            ${imgBg}
+            <div class="story-avatar">${s.avatar}</div>
+            <div class="story-name">${s.name}</div>
+          `;
+          bar.appendChild(card);
+        });
+      }
+
+      function renderFeedPosts(postsArray) {
+        const feedList = document.getElementById("postsFeedList");
+        feedList.innerHTML = "";
+        postsArray.forEach((post, index) => {
+          let imgTag = post.img
+            ? `<img src="${post.img}" class="post-media-img" alt="Ảnh chia sẻ">`
+            : "";
+          let commentsHtml = "";
+          post.comments.forEach((c) => {
+            commentsHtml += `<div class="comment-item"><b>${c.author}:</b> ${c.text}</div>`;
+          });
+
+          const card = document.createElement("div");
+          card.className = "feed-post-card";
+          card.innerHTML = `
+            <div class="post-author-info">
+                <div class="author-avatar">${post.author.charAt(0).toUpperCase()}</div>
+                <div>
+                    <div class="author-name">${post.author}</div>
+                    <div class="post-time">${post.time}</div>
+                </div>
+            </div>
+            <div class="post-content-text">${post.text}</div>
+            ${imgTag}
+            <div class="post-actions-bar">
+                <button class="post-action-btn" onclick="addHug(${index})">🌸 Ôm cái nhẹ (${post.hugs})</button>
+                <button class="post-action-btn" onclick="addHeart(${index})">💖 Thả tim (${post.hearts})</button>
+                <button class="post-action-btn">💬 Bình luận (${post.comments.length})</button>
+            </div>
+            <div class="comments-section">
+                <div id="commentList_${index}">${commentsHtml}</div>
+                <div class="comment-input-box">
+                    <input type="text" id="commentInput_${index}" placeholder="Viết bình luận tích cực...">
+                    <button class="btn-send-comment" onclick="submitComment(${index})">Gửi</button>
+                </div>
+            </div>
+          `;
+          feedList.appendChild(card);
+        });
+      }
+
+      function addHug(index) {
+        forumPostsList[index].hugs++;
+        renderFeedPosts(forumPostsList);
+      }
+
+      function addHeart(index) {
+        forumPostsList[index].hearts++;
+        renderFeedPosts(forumPostsList);
+      }
+
+      function submitComment(index) {
+        const input = document.getElementById(`commentInput_${index}`);
+        const text = input.value.trim();
+        if (text === "") return;
+
+        if (checkToxicContent(text)) {
+          alert(
+            "⚠️ Bình luận chứa từ ngữ không phù hợp với chuẩn mực an toàn cộng đồng.",
+          );
+          return;
+        }
+
+        forumPostsList[index].comments.push({
+          author: loggedInUserName || "Thành viên",
+          text: escapeHtml(text),
+        });
+        input.value = "";
+        renderFeedPosts(forumPostsList);
+      }
+
+      function submitNewPost() {
+        const content = document
+          .getElementById("postContentInput")
+          .value.trim();
+        const isAnonymous = document.getElementById("anonymousCheck").checked;
+
+        if (content === "") {
+          alert("Vui lòng nhập nội dung bạn muốn chia sẻ!");
+          return;
+        }
+
+        if (checkToxicContent(content)) {
+          alert(
+            "⚠️ Bài viết chứa nội dung không phù hợp với tiêu chuẩn an toàn của Trạm Trú Ân!",
+          );
+          return;
+        }
+
+        const authorName = isAnonymous
+          ? "Thành viên ẩn danh"
+          : loggedInUserName;
+        const newPost = {
+          id: Date.now(),
+          author: authorName,
+          time: "Vừa xong",
+          text: escapeHtml(content),
+          img: selectedPostImageUrl,
+          hugs: 0,
+          hearts: 0,
+          comments: [],
+        };
+
+        forumPostsList.unshift(newPost);
+        renderFeedPosts(forumPostsList);
+        document.getElementById("postContentInput").value = "";
+        selectedPostImageUrl = "";
+        alert("Đăng bài thành công!");
+      }
+
+      function escapeHtml(text) {
+        return text
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      // Modal Đăng nhập
+      const openBtn = document.getElementById("openLoginBtn");
+      const modal = document.getElementById("loginModal");
+      const closeBtn = document.getElementById("closeLoginBtn");
+
+      const emailInput = document.getElementById("emailInput");
+      const passInput = document.getElementById("passInput");
+      const submitLoginBtn = document.getElementById("submitLoginBtn");
+      const facebookLoginBtn = document.getElementById("facebookLoginBtn");
+      const anonymousLoginBtn = document.getElementById("anonymousLoginBtn");
+      const userMenuArea = document.getElementById("userMenuArea");
+
+      openBtn.addEventListener("click", () => {
+        modal.style.display = "flex";
+      });
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) modal.style.display = "none";
+      });
+
+      function handleLoginSuccess(loginType, identifier) {
+        isUserLoggedIn = true;
+        modal.style.display = "none";
+        let avatarContent = "";
+
+        if (loginType === "email") {
+          loggedInUserName = identifier.split("@")[0];
+          let firstLetter = loggedInUserName.charAt(0).toUpperCase();
+          avatarContent = `<div class="user-avatar">${firstLetter}</div>`;
+        } else if (loginType === "facebook") {
+          loggedInUserName = "Thành viên FB";
+          avatarContent = `<div class="user-avatar"><img src="https://i.imgur.com/6VBx3io.png" alt="FB" style="width:100%;height:100%;object-fit:cover;"></div>`;
+        } else {
+          loggedInUserName = "Thành viên Ẩn danh";
+          avatarContent = `<div class="user-avatar">Ẩn</div>`;
+        }
+
+        userMenuArea.innerHTML = `
+          <div class="user-avatar-container">
+              ${avatarContent}
+              <span class="user-name">${loggedInUserName}</span>
+          </div>
+          <button class="btn-logout" id="logoutBtn">Đăng xuất</button>
+        `;
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+          location.reload();
+        });
+        openFeedView();
+      }
+
+      submitLoginBtn.addEventListener("click", () => {
+        if (emailInput.value.trim() !== "" && passInput.value.trim() !== "") {
+          handleLoginSuccess("email", emailInput.value);
+        } else {
+          alert("Vui lòng nhập đầy đủ thông tin!");
+        }
+      });
+
+      facebookLoginBtn.addEventListener("click", () => {
+        handleLoginSuccess("facebook", "FB User");
+      });
+      anonymousLoginBtn.addEventListener("click", () => {
+        handleLoginSuccess("anonymous", "Anonymous");
+      });
+    </script>
+  </body>
+</html>

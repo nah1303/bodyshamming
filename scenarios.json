@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "Một bạn trong lớp thường xuyên chê bai ngoại hình của bạn khác trước mặt nhiều người trong giờ ra chơi. Theo em, hành vi này nên được đánh giá như thế nào?",
+    "options": [
+      "Đó chỉ là lời đùa vui giữa bạn bè, không cần quan tâm.",
+      "Có dấu hiệu miệt thị ngoại hình, gây tổn thương và cần xem xét can thiệp.",
+      "Bạn bị chê nên tự thay đổi ngoại hình để không bị chê nữa.",
+      "Không có cách nào để giải quyết việc này."
+    ],
+    "correct": 1,
+    "explanation": "Việc liên tục chê bai ngoại hình trước đám đông có thể làm người nghe xấu hổ, tổn thương và mất tự tin. Em nên góp ý bạn dừng lại hoặc nhờ thầy cô hỗ trợ."
+  },
+  {
+    "id": 2,
+    "question": "Khi thấy một bạn trong lớp bị nhóm bạn khác đặt biệt danh xúc phạm về chiều cao, em nên làm gì?",
+    "options": [
+      "Đứng xem và cười hùa theo cho vui.",
+      "Im lặng bỏ đi vì không phải việc của mình.",
+      "Bình tĩnh nhắc nhở các bạn dừng lại và động viên bạn bị trêu chọc.",
+      "Quay video lại đăng lên mạng xã hội."
+    ],
+    "correct": 2,
+    "explanation": "Người chứng kiến có vai trò rất quan trọng (Upstander). Sự lên tiếng ôn hòa của em giúp bảo vệ bạn và ngăn chặn hành vi bắt nạt."
+  }
+]
